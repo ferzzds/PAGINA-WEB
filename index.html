@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Asistencia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar__content">
+        <nav class="topnav">
+          <button class="chip chip--active">🕒 Asistencia</button>
+          <button class="chip">🗂️ Base de Datos</button>
+          <button class="chip">👥 Recursos Humanos</button>
+          <button class="chip">🏢 Empresas</button>
+        </nav>
+        <div class="userbox">
+          <span>Bienvenido, <strong>admin</strong></span>
+          <button class="btn btn--light">Cerrar Sesión</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container page">
+      <section class="title-row">
+        <div>
+          <h1>Sistema de Asistencia</h1>
+          <p>Control de personal operativo y administrativo</p>
+        </div>
+        <div class="pill">👥 <span id="employeeTotal">13</span> Empleados</div>
+      </section>
+
+      <section class="tabs card">
+        <button class="btn btn--dark">Vista Diaria</button>
+        <button class="btn">Vista Quincenal</button>
+        <button class="btn">Vista Mensual</button>
+        <button class="btn">Configurar Sueldos</button>
+        <button class="btn">Gestión de Pagos</button>
+      </section>
+
+      <section class="date-strip card">
+        <div>
+          <p class="muted">Fecha seleccionada</p>
+          <h2 id="selectedDate"></h2>
+        </div>
+        <div class="actions">
+          <button class="btn" id="prevDay">← Anterior</button>
+          <button class="btn" id="todayBtn">Hoy</button>
+          <button class="btn" id="nextDay">Siguiente →</button>
+        </div>
+      </section>
+
+      <section class="schedule card" id="scheduleCard">
+        <h3>⏱ Horario <span id="dayName">Laboral</span></h3>
+        <div class="schedule-grid">
+          <article>
+            <p>Entrada</p>
+            <strong id="entryTime">08:00</strong>
+          </article>
+          <article>
+            <p>Refrigerio</p>
+            <strong id="breakTime">13:00 - 14:00</strong>
+          </article>
+          <article>
+            <p>Salida</p>
+            <strong id="exitTime">17:30</strong>
+          </article>
+        </div>
+        <p class="notice" id="scheduleNotice">Horas extras disponibles después del horario regular.</p>
+      </section>
+
+      <section class="stats">
+        <article class="stat card">
+          <p>Operarios Presentes</p>
+          <h4 id="opCount">0/9</h4>
+        </article>
+        <article class="stat card">
+          <p>Administrativos Presentes</p>
+          <h4 id="admCount">0/4</h4>
+        </article>
+        <article class="stat card">
+          <p>Total Presentes</p>
+          <h4 id="totalCount">0/13</h4>
+        </article>
+        <article class="stat card">
+          <p>Total Horas Extras</p>
+          <h4><span id="extraCount">0</span>h</h4>
+        </article>
+        <article class="stat card">
+          <p>Tardanzas</p>
+          <h4><span id="lateCount">0</span></h4>
+        </article>
+      </section>
+
+      <section class="card table-card">
+        <div class="table-actions">
+          <h3>Registro de Asistencia</h3>
+          <div>
+            <button class="btn" id="markAllEntry">Marcar todas las entradas</button>
+            <button class="btn" id="markAllExit">Marcar todas las salidas</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Empleado</th>
+                <th>Tipo</th>
+                <th>Entrada</th>
+                <th>Hora Llegada</th>
+                <th>Refrigerio</th>
+                <th>Salida</th>
+                <th>Horas Extras</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <template id="rowTemplate">
+      <tr>
+        <td class="idx"></td>
+        <td class="name"></td>
+        <td><span class="tag"></span></td>
+        <td><input type="checkbox" class="entry-check" /></td>
+        <td>
+          <input type="time" class="time-input" value="08:00" />
+        </td>
+        <td><input type="checkbox" class="break-check" /></td>
+        <td><input type="checkbox" class="exit-check" /></td>
+        <td><input type="number" class="extra-input" value="0" min="0" max="8" /></td>
+        <td><span class="status">Ausente</span></td>
+      </tr>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
